@@ -1,6 +1,5 @@
 from src.domain.common.value_objects import Id
-from src.domain.groups.entities import Group, GroupData
-from src.domain.groups.entities.participant import ParticipantData
+from src.domain.groups.entities import Group
 from src.domain.groups.errors import GroupNotFoundError
 from src.domain.groups.repositories import GroupsRepository
 
@@ -15,21 +14,6 @@ class UpdateGroupNameUseCase:
         if existing is None:
             raise GroupNotFoundError(f"Group with id {group_id.value} not found.")
 
-        updated = Group.create(
-            GroupData(
-                id=group_id.value,
-                name=name,
-                currency=existing.currency,
-                participants=[
-                    ParticipantData(
-                        id=p.id,
-                        display_name=p.display_name,
-                        type=p.type.value,
-                        user_id=p.user_id,
-                    )
-                    for p in existing.participants
-                ],
-            )
-        )
-        await self._groups_repository.update(updated)
-        return updated
+        existing.update_name(name)
+        await self._groups_repository.update(existing)
+        return existing

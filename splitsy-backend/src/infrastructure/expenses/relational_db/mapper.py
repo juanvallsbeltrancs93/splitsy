@@ -20,7 +20,9 @@ class ExpenseMapper(Mapper[Expense, ExpenseORM]):
                 paid_by=orm_model.paid_by,
                 description=orm_model.description,
                 splits=[
-                    SplitData(participant_id=s.participant_id, amount=Decimal(str(s.amount)))
+                    SplitData(
+                        participant_id=s.participant_id, amount=Decimal(str(s.amount))
+                    )
                     for s in orm_model.splits
                 ],
             )

@@ -11,12 +11,14 @@ from src.domain.expenses.errors.expense_errors import (
     ExpenseNotFoundError,
     InvalidParticipantError,
 )
-from src.domain.groups.errors import ParticipantNameAlreadyInGroupError
-from src.domain.groups.errors.groups_errors import (
+from src.domain.groups.errors import (
     AlreadyExistsGroupError,
     GroupNotFoundError,
+    LastParticipantCannotLeaveError,
+    NotGroupOwnerError,
     ParticipantAlreadyClaimedError,
     ParticipantAlreadyInGroupError,
+    ParticipantNameAlreadyInGroupError,
     ParticipantNotAliasError,
     ParticipantNotFoundInGroupError,
 )
@@ -81,112 +83,140 @@ app.add_middleware(
 async def validation_error_handler(
     request: Request, exc: ValidationError
 ) -> JSONResponse:
-    return JSONResponse(status_code=422, content={"detail": str(exc)})
+    return JSONResponse(status_code=422, content={"error": "validation_error", "message": str(exc), "status_code": 422})
 
 
 @app.exception_handler(UserNotFoundError)
 async def user_not_found_handler(
     request: Request, exc: UserNotFoundError
 ) -> JSONResponse:
-    return JSONResponse(status_code=404, content={"detail": str(exc)})
+    return JSONResponse(status_code=404, content={"error": "user_not_found", "message": str(exc), "status_code": 404})
 
 
 @app.exception_handler(UserAlreadyExistsError)
 async def user_already_exists_handler(
     request: Request, exc: UserAlreadyExistsError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "user_already_exists", "message": str(exc), "status_code": 409})
 
 
 @app.exception_handler(InvalidCredentialsError)
 async def invalid_credentials_handler(
     request: Request, exc: InvalidCredentialsError
 ) -> JSONResponse:
-    return JSONResponse(status_code=401, content={"detail": str(exc)})
+    return JSONResponse(status_code=401, content={"error": "invalid_credentials", "message": str(exc), "status_code": 401})
 
 
 @app.exception_handler(GroupNotFoundError)
 async def group_not_found_handler(
     request: Request, exc: GroupNotFoundError
 ) -> JSONResponse:
-    return JSONResponse(status_code=404, content={"detail": str(exc)})
+    return JSONResponse(status_code=404, content={"error": "group_not_found", "message": str(exc), "status_code": 404})
 
 
 @app.exception_handler(AlreadyExistsGroupError)
 async def already_exists_group_handler(
     request: Request, exc: AlreadyExistsGroupError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "group_already_exists", "message": str(exc), "status_code": 409})
 
 
 @app.exception_handler(ParticipantAlreadyInGroupError)
 async def participant_already_in_group_handler(
     request: Request, exc: ParticipantAlreadyInGroupError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "participant_already_in_group", "message": str(exc), "status_code": 409})
 
 
 @app.exception_handler(ParticipantNameAlreadyInGroupError)
 async def participant_name_already_in_group_handler(
     request: Request, exc: ParticipantNameAlreadyInGroupError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "participant_name_already_in_group", "message": str(exc), "status_code": 409})
 
 
 @app.exception_handler(ParticipantNotFoundInGroupError)
 async def participant_not_found_in_group_handler(
     request: Request, exc: ParticipantNotFoundInGroupError
 ) -> JSONResponse:
-    return JSONResponse(status_code=404, content={"detail": str(exc)})
+    return JSONResponse(status_code=404, content={"error": "participant_not_found_in_group", "message": str(exc), "status_code": 404})
 
 
 @app.exception_handler(ParticipantNotAliasError)
 async def participant_not_alias_handler(
     request: Request, exc: ParticipantNotAliasError
 ) -> JSONResponse:
-    return JSONResponse(status_code=422, content={"detail": str(exc)})
+    return JSONResponse(status_code=422, content={"error": "participant_not_alias", "message": str(exc), "status_code": 422})
 
 
 @app.exception_handler(ParticipantAlreadyClaimedError)
 async def participant_already_claimed_handler(
     request: Request, exc: ParticipantAlreadyClaimedError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "participant_already_claimed", "message": str(exc), "status_code": 409})
+
+
+@app.exception_handler(NotGroupOwnerError)
+async def not_group_owner_handler(
+    request: Request, exc: NotGroupOwnerError
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=403,
+        content={
+            "error": "not_group_owner",
+            "message": "Only the group owner can perform this operation",
+            "status_code": 403,
+        },
+    )
+
+
+@app.exception_handler(LastParticipantCannotLeaveError)
+async def last_participant_cannot_leave_handler(
+    request: Request, exc: LastParticipantCannotLeaveError
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=403,
+        content={
+            "error": "last_participant_cannot_leave",
+            "message": "Cannot leave group as the last active participant.",
+            "status_code": 403,
+        },
+    )
 
 
 @app.exception_handler(ExpenseNotFoundError)
 async def expense_not_found_handler(
     request: Request, exc: ExpenseNotFoundError
 ) -> JSONResponse:
-    return JSONResponse(status_code=404, content={"detail": str(exc)})
+    return JSONResponse(status_code=404, content={"error": "expense_not_found", "message": str(exc), "status_code": 404})
 
 
 @app.exception_handler(InvalidParticipantError)
 async def invalid_participant_handler(
     request: Request, exc: InvalidParticipantError
 ) -> JSONResponse:
-    return JSONResponse(status_code=422, content={"detail": str(exc)})
+    return JSONResponse(status_code=422, content={"error": "invalid_participant", "message": str(exc), "status_code": 422})
 
 
 @app.exception_handler(AlreadyExistsExpenseError)
 async def already_exists_expense_handler(
     request: Request, exc: AlreadyExistsExpenseError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "expense_already_exists", "message": str(exc), "status_code": 409})
 
 
 @app.exception_handler(SettlementNotFoundError)
 async def settlement_not_found_handler(
     request: Request, exc: SettlementNotFoundError
 ) -> JSONResponse:
-    return JSONResponse(status_code=404, content={"detail": str(exc)})
+    return JSONResponse(status_code=404, content={"error": "settlement_not_found", "message": str(exc), "status_code": 404})
 
 
 @app.exception_handler(AlreadyExistsSettlementError)
 async def already_exists_settlement_handler(
     request: Request, exc: AlreadyExistsSettlementError
 ) -> JSONResponse:
-    return JSONResponse(status_code=409, content={"detail": str(exc)})
+    return JSONResponse(status_code=409, content={"error": "settlement_already_exists", "message": str(exc), "status_code": 409})
 
 
 @app.exception_handler(TokenValidationError)
@@ -195,7 +225,7 @@ async def token_validation_error_handler(
 ) -> JSONResponse:
     return JSONResponse(
         status_code=401,
-        content={"detail": str(exc)},
+        content={"error": "token_validation_error", "message": str(exc), "status_code": 401},
         headers={"WWW-Authenticate": "Bearer"},
     )
 

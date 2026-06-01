@@ -127,7 +127,7 @@ async def remove_participant(
         Depends(get_remove_participant_from_group_use_case),
     ],
 ) -> GroupResponseDTO:
-    group = await use_case(group_id, participant_id)
+    group = await use_case(group_id, participant_id, requester_id=current_user.id)
     return GroupResponseDTO.from_entity(group)
 
 
@@ -178,7 +178,7 @@ async def delete_group(
     current_user: Annotated[User, Depends(get_current_user)],
     use_case: Annotated[DeleteGroupUseCase, Depends(get_delete_group_use_case)],
 ) -> Response:
-    await use_case(Id.create(group_id))
+    await use_case(Id.create(group_id), requester_id=current_user.id)
     return Response(status_code=204)
 
 

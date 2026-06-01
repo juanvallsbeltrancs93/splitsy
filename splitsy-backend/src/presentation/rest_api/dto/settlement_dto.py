@@ -7,7 +7,9 @@ from pydantic import BaseModel, Field
 
 
 class SettlementCreateDTO(BaseModel):
-    from_participant_id: str = Field(..., description="UUID of the participant who is paying")
+    from_participant_id: str = Field(
+        ..., description="UUID of the participant who is paying"
+    )
     to_participant_id: str = Field(
         ..., description="UUID of the participant who receives the payment"
     )

@@ -13,6 +13,7 @@ class ParticipantData:
     type: str
     user_id: str | None = None
     id: str | None = None
+    is_active: bool = True
 
 
 @dataclass()
@@ -21,6 +22,7 @@ class ParticipantEntityData:
     display_name: DisplayName
     type: ParticipantType
     user_id: Id | None
+    is_active: bool
 
 
 class Participant(Entity[ParticipantEntityData]):
@@ -29,6 +31,7 @@ class Participant(Entity[ParticipantEntityData]):
         self._display_name = data.display_name
         self._type = data.type
         self._user_id = data.user_id
+        self._is_active = data.is_active
 
     @property
     def display_name(self) -> str:
@@ -44,6 +47,13 @@ class Participant(Entity[ParticipantEntityData]):
             return None
         return self._user_id.value
 
+    @property
+    def is_active(self) -> bool:
+        return self._is_active
+
+    def deactivate(self) -> None:
+        self._is_active = False
+
     def is_registered(self) -> bool:
         return self._type == ParticipantType.REGISTERED
 
@@ -55,6 +65,7 @@ class Participant(Entity[ParticipantEntityData]):
                 display_name=DisplayName.create(data.display_name),
                 type=ParticipantType(data.type.upper()),
                 user_id=Id.create(data.user_id) if data.user_id else None,
+                is_active=data.is_active,
             )
         )
 

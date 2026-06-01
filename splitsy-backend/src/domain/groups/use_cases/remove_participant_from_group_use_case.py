@@ -8,12 +8,14 @@ class RemoveParticipantFromGroupUseCase:
     def __init__(self, groups_repository: GroupsRepository) -> None:
         self._groups_repository = groups_repository
 
-    async def __call__(self, group_id: str, participant_id: str) -> Group:
+    async def __call__(
+        self, group_id: str, participant_id: str, requester_id: str
+    ) -> Group:
         group = await self._groups_repository.get_by_id(Id.create(group_id))
         if group is None:
             raise GroupNotFoundError(f"Group with id {group_id} not found.")
 
-        group.remove_participant(Id.create(participant_id))
+        group.remove_participant(Id.create(participant_id), requester_id=requester_id)
 
         await self._groups_repository.update(group)
 

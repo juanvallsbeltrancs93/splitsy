@@ -4,4 +4,8 @@ from src.domain.expenses.errors.expense_errors import (
     InvalidParticipantError,
 )
 
-__all__ = ["ExpenseNotFoundError", "AlreadyExistsExpenseError", "InvalidParticipantError"]
+__all__ = [
+    "ExpenseNotFoundError",
+    "AlreadyExistsExpenseError",
+    "InvalidParticipantError",
+]

@@ -23,9 +23,7 @@ class UpdateExpenseUseCase:
 
         group = await self._groups_repository.get_by_id(Id.create(existing.group_id))
         if group is None:
-            raise GroupNotFoundError(
-                f"Group with id {existing.group_id} not found."
-            )
+            raise GroupNotFoundError(f"Group with id {existing.group_id} not found.")
 
         valid_participant_ids = {p.id for p in group.participants}
 

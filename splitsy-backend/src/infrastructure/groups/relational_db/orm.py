@@ -14,6 +14,8 @@ class GroupORM(Base, TimestampMixin):
     # Production migration note: add `currency VARCHAR(3) NOT NULL DEFAULT 'USD'`
     # to the `groups` table, backfill existing rows, then drop the default.
     currency: Mapped[str] = mapped_column(nullable=False)
+    # nullable in ORM to handle rows created before migration; entity always requires it.
+    owner_id: Mapped[str | None] = mapped_column(nullable=True)
 
     participants: Mapped[list[GroupParticipantORM]] = relationship(
         "GroupParticipantORM",
@@ -34,5 +36,6 @@ class GroupParticipantORM(Base):
     display_name: Mapped[str] = mapped_column(nullable=False)
     type: Mapped[str] = mapped_column(nullable=False)
     user_id: Mapped[str | None] = mapped_column(nullable=True)
+    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
     group: Mapped[GroupORM] = relationship("GroupORM", back_populates="participants")

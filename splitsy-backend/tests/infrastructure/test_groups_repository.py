@@ -112,3 +112,56 @@ class TestRelationalDBGroupsRepository:
         )
         assert registered_p.user_id == user_id.value
         assert alias_p.user_id is None
+
+    async def test_owner_id_unchanged_after_remove_participant(
+        self, repo: RelationalDBGroupsRepository
+    ):
+        """Regression: owner_id must not change when owner removes another participant."""
+        owner_user_id = "aaaaaaaa-0000-0000-0000-000000000001"
+        user2_id = "bbbbbbbb-0000-0000-0000-000000000002"
+        participant1_id = "cccccccc-0000-0000-0000-000000000001"
+        participant2_id = "cccccccc-0000-0000-0000-000000000002"
+
+        group = GroupMother.create(
+            id="dddddddd-0000-0000-0000-000000000001",
+            owner_id=participant1_id,
+            participants=[
+                ParticipantData(
+                    id=participant1_id,
+                    display_name="Owner User",
+                    type="REGISTERED",
+                    user_id=owner_user_id,
+                ),
+                ParticipantData(
+                    id=participant2_id,
+                    display_name="User Two",
+                    type="REGISTERED",
+                    user_id=user2_id,
+                ),
+            ],
+        )
+
+        # 1. persist
+        await repo.create(group)
+
+        # 2. reload and verify initial state
+        loaded = await repo.get_by_id(Id.create(group.id))
+        assert loaded is not None
+        assert loaded.owner_id == participant1_id
+
+        # 3. owner removes user-2
+        loaded.remove_participant(Id.create(participant2_id), requester_id=owner_user_id)
+        await repo.update(loaded)
+
+        # 4. reload and assert owner_id is unchanged
+        after = await repo.get_by_id(Id.create(group.id))
+        assert after is not None
+        assert after.owner_id == participant1_id, (
+            f"Bug: owner_id changed to '{after.owner_id}' after removing a participant"
+        )
+
+        # 5. verify the right participant was deactivated
+        p1 = next((p for p in after.participants if p.id == participant1_id), None)
+        p2 = next((p for p in after.participants if p.id == participant2_id), None)
+        assert p1 is not None and p1.is_active, "Owner participant should still be active"
+        assert p2 is not None and not p2.is_active, "Removed participant should be inactive"

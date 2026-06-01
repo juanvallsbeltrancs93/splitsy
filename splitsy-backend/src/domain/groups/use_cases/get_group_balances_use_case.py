@@ -44,6 +44,5 @@ class GetGroupBalancesUseCase:
             settlement.apply_to_balances(balances)
 
         return [
-            ParticipantBalance(participant_id=k, balance=v)
-            for k, v in balances.items()
+            ParticipantBalance(participant_id=k, balance=v) for k, v in balances.items()
         ]

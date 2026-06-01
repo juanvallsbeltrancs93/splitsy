@@ -34,6 +34,7 @@ class ParticipantResponseDTO(BaseModel):
     display_name: str
     type: str
     user_id: str | None = None
+    is_active: bool
 
     @classmethod
     def from_entity(cls, participant: Participant) -> ParticipantResponseDTO:
@@ -42,13 +43,17 @@ class ParticipantResponseDTO(BaseModel):
             display_name=participant.display_name,
             type=participant.type.value,
             user_id=participant.user_id,
+            is_active=participant.is_active,
         )
 
 
 class GroupResponseDTO(BaseModel):
     id: str
     name: str
-    currency: str = Field(description="ISO 4217 currency code of the group (e.g., USD, EUR, ARS).")
+    owner_id: str
+    currency: str = Field(
+        description="ISO 4217 currency code of the group (e.g., USD, EUR, ARS)."
+    )
     participants: list[ParticipantResponseDTO]
 
     @classmethod
@@ -56,8 +61,11 @@ class GroupResponseDTO(BaseModel):
         return cls(
             id=group.id,
             name=group.name,
+            owner_id=group.owner_id,
             currency=group.currency,
-            participants=[ParticipantResponseDTO.from_entity(p) for p in group.participants],
+            participants=[
+                ParticipantResponseDTO.from_entity(p) for p in group.participants
+            ],
         )
 
 

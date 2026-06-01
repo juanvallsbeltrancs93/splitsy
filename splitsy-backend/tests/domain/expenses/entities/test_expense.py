@@ -46,8 +46,12 @@ class TestExpenseEntity:
             ExpenseMother.create(
                 amount=Decimal("100.00"),
                 splits=[
-                    SplitData(participant_id=Id.create().value, amount=Decimal("60.00")),
-                    SplitData(participant_id=Id.create().value, amount=Decimal("20.00")),
+                    SplitData(
+                        participant_id=Id.create().value, amount=Decimal("60.00")
+                    ),
+                    SplitData(
+                        participant_id=Id.create().value, amount=Decimal("20.00")
+                    ),
                 ],
             )
 
@@ -82,7 +86,9 @@ class TestExpenseEntity:
                 date=datetime(2024, 1, 3, tzinfo=timezone.utc),
                 group_id=Id.create().value,
                 paid_by=Id.create().value,
-                splits=[SplitData(participant_id=Id.create().value, amount=Decimal("0"))],
+                splits=[
+                    SplitData(participant_id=Id.create().value, amount=Decimal("0"))
+                ],
             ),
             ExpenseData(
                 name="Invalid",
@@ -90,7 +96,9 @@ class TestExpenseEntity:
                 date=datetime(2024, 1, 3, tzinfo=timezone.utc),
                 group_id=Id.create().value,
                 paid_by=Id.create().value,
-                splits=[SplitData(participant_id=Id.create().value, amount=Decimal("-10"))],
+                splits=[
+                    SplitData(participant_id=Id.create().value, amount=Decimal("-10"))
+                ],
             ),
         ],
     )

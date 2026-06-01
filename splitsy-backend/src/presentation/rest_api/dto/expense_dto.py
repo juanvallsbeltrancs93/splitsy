@@ -9,7 +9,9 @@ from src.domain.expenses.entities.expense import Expense, ExpenseData, SplitData
 
 
 class SplitDTO(BaseModel):
-    participant_id: str = Field(..., description="UUID of the participant responsible for this split")
+    participant_id: str = Field(
+        ..., description="UUID of the participant responsible for this split"
+    )
     amount: Decimal = Field(..., gt=0, description="Amount this participant owes")
 
 
@@ -47,7 +49,10 @@ class ExpenseUpdateDTO(BaseModel):
             group_id=existing.group_id,
             paid_by=self.paid_by if self.paid_by is not None else existing.paid_by,
             splits=(
-                [SplitData(participant_id=s.participant_id, amount=s.amount) for s in self.splits]
+                [
+                    SplitData(participant_id=s.participant_id, amount=s.amount)
+                    for s in self.splits
+                ]
                 if self.splits is not None
                 else [
                     SplitData(participant_id=s["participant_id"], amount=s["amount"])

@@ -12,7 +12,8 @@ class ExpenseMother:
     _DEFAULT_PAID_BY = "550e8400-e29b-41d4-a716-446655440000"
     _DEFAULT_SPLITS = [
         SplitData(
-            participant_id="550e8400-e29b-41d4-a716-446655440000", amount=Decimal("50.00")
+            participant_id="550e8400-e29b-41d4-a716-446655440000",
+            amount=Decimal("50.00"),
         )
     ]
     _DEFAULT_ID = "770e8400-e29b-41d4-a716-446655440000"

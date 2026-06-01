@@ -174,7 +174,7 @@ class TestAddParticipant:
 
 
 class TestRemoveParticipant:
-    async def test_returns_200_with_participant_removed(
+    async def test_returns_200_with_participant_still_in_list_but_inactive(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
     ):
         second = await register_user(
@@ -198,6 +198,7 @@ class TestRemoveParticipant:
             json={"type": "registered", "user_id": second["id"]},
             headers=second_headers,
         )
+        original_count = len(add_resp.json()["participants"])
         participant_id = next(
             p["id"]
             for p in add_resp.json()["participants"]
@@ -212,7 +213,12 @@ class TestRemoveParticipant:
         assert resp.status_code == 200
         body = resp.json()
         assert body["currency"] == "USD"
-        assert not any(p.get("user_id") == second["id"] for p in body["participants"])
+        assert len(body["participants"]) == original_count
+        removed = next(
+            (p for p in body["participants"] if p.get("user_id") == second["id"]), None
+        )
+        assert removed is not None
+        assert removed["is_active"] is False
 
     async def test_returns_404_when_user_not_in_group(
         self, client: AsyncClient, auth_headers: dict
@@ -229,6 +235,102 @@ class TestRemoveParticipant:
         )
 
         assert resp.status_code == 404
+
+    async def test_returns_403_when_requester_is_not_owner(
+        self, client: AsyncClient, auth_headers: dict, registered_user: dict
+    ):
+        second = await register_user(
+            client, name="Ana", email="ana@example.com", password="Password123!"
+        )
+        second_token_resp = await client.post(
+            f"{PREFIX}/auth/token",
+            data={"username": "ana@example.com", "password": "Password123!"},
+        )
+        second_headers = {
+            "Authorization": f"Bearer {second_token_resp.json()['access_token']}"
+        }
+
+        await register_user(
+            client, name="Carlos", email="carlos@example.com", password="Password123!"
+        )
+        third_token_resp = await client.post(
+            f"{PREFIX}/auth/token",
+            data={"username": "carlos@example.com", "password": "Password123!"},
+        )
+        third_headers = {
+            "Authorization": f"Bearer {third_token_resp.json()['access_token']}"
+        }
+
+        group = (
+            await client.post(
+                f"{PREFIX}/groups", json={"name": "Trip"}, headers=auth_headers
+            )
+        ).json()
+        add_resp = await client.post(
+            f"{PREFIX}/groups/{group['id']}/participants",
+            json={"type": "registered", "user_id": second["id"]},
+            headers=second_headers,
+        )
+        participant_id = next(
+            p["id"]
+            for p in add_resp.json()["participants"]
+            if p.get("user_id") == second["id"]
+        )
+
+        resp = await client.delete(
+            f"{PREFIX}/groups/{group['id']}/participants/{participant_id}",
+            headers=third_headers,
+        )
+
+        assert resp.status_code == 403
+        body = resp.json()
+        assert body["error"] == "not_group_owner"
+        assert body["status_code"] == 403
+
+
+    async def test_non_owner_can_remove_themselves(
+        self, client: AsyncClient, auth_headers: dict, registered_user: dict
+    ):
+        second = await register_user(
+            client, name="Ana", email="ana2@example.com", password="Password123!"
+        )
+        token_resp = await client.post(
+            f"{PREFIX}/auth/token",
+            data={"username": "ana2@example.com", "password": "Password123!"},
+        )
+        second_headers = {
+            "Authorization": f"Bearer {token_resp.json()['access_token']}"
+        }
+
+        group = (
+            await client.post(
+                f"{PREFIX}/groups", json={"name": "Trip"}, headers=auth_headers
+            )
+        ).json()
+        add_resp = await client.post(
+            f"{PREFIX}/groups/{group['id']}/participants",
+            json={"type": "registered", "user_id": second["id"]},
+            headers=second_headers,
+        )
+        participant_id = next(
+            p["id"]
+            for p in add_resp.json()["participants"]
+            if p.get("user_id") == second["id"]
+        )
+
+        # Non-owner removes their OWN participant — should succeed
+        resp = await client.delete(
+            f"{PREFIX}/groups/{group['id']}/participants/{participant_id}",
+            headers=second_headers,
+        )
+
+        assert resp.status_code == 200
+        body = resp.json()
+        removed = next(
+            (p for p in body["participants"] if p.get("user_id") == second["id"]), None
+        )
+        assert removed is not None
+        assert removed["is_active"] is False
 
 
 class TestGetGroupBalances:
@@ -353,6 +455,28 @@ class TestDeleteGroup:
         )
 
         assert resp.status_code == 404
+
+    async def test_returns_403_when_requester_is_not_owner(
+        self, client: AsyncClient, auth_headers: dict
+    ):
+        group = (
+            await client.post(
+                f"{PREFIX}/groups", json={"name": "Trip"}, headers=auth_headers
+            )
+        ).json()
+
+        await register_user(client, email="other@example.com")
+        other_token = await get_token(client, email="other@example.com")
+        other_headers = {"Authorization": f"Bearer {other_token}"}
+
+        resp = await client.delete(
+            f"{PREFIX}/groups/{group['id']}", headers=other_headers
+        )
+
+        assert resp.status_code == 403
+        body = resp.json()
+        assert body["error"] == "not_group_owner"
+        assert body["status_code"] == 403
 
     async def test_deletes_linked_expenses_and_settlements(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
@@ -484,6 +608,47 @@ class TestListUserGroups:
         resp = await client.get(f"{PREFIX}/groups")
 
         assert resp.status_code == 401
+
+    async def test_list_user_groups_does_not_include_group_where_user_left(
+        self, client: AsyncClient, auth_headers: dict, registered_user: dict
+    ):
+        second = await register_user(
+            client, name="Ana", email="ana@example.com", password="Password123!"
+        )
+        token_resp = await client.post(
+            f"{PREFIX}/auth/token",
+            data={"username": "ana@example.com", "password": "Password123!"},
+        )
+        second_headers = {
+            "Authorization": f"Bearer {token_resp.json()['access_token']}"
+        }
+
+        group = (
+            await client.post(
+                f"{PREFIX}/groups", json={"name": "Trip"}, headers=auth_headers
+            )
+        ).json()
+        add_resp = await client.post(
+            f"{PREFIX}/groups/{group['id']}/participants",
+            json={"type": "registered", "user_id": second["id"]},
+            headers=second_headers,
+        )
+        participant_id = next(
+            p["id"]
+            for p in add_resp.json()["participants"]
+            if p.get("user_id") == second["id"]
+        )
+
+        await client.delete(
+            f"{PREFIX}/groups/{group['id']}/participants/{participant_id}",
+            headers=auth_headers,
+        )
+
+        resp = await client.get(f"{PREFIX}/groups", headers=second_headers)
+
+        assert resp.status_code == 200
+        body = resp.json()
+        assert not any(g["id"] == group["id"] for g in body)
 
 
 class TestClaimParticipant:
@@ -622,3 +787,31 @@ class TestClaimParticipant:
         resp = await client.post(f"{PREFIX}/groups/{group['id']}/claim/{alias['id']}")
 
         assert resp.status_code == 401
+
+
+
+class TestOwnerSelfRemoval:
+    async def test_last_active_participant_cannot_leave_returns_403(
+        self, client: AsyncClient, auth_headers: dict, registered_user: dict
+    ):
+        group = (
+            await client.post(
+                f"{PREFIX}/groups", json={"name": "Trip"}, headers=auth_headers
+            )
+        ).json()
+
+        owner_participant_id = next(
+            p["id"]
+            for p in group["participants"]
+            if p.get("user_id") == registered_user["id"]
+        )
+
+        resp = await client.delete(
+            f"{PREFIX}/groups/{group['id']}/participants/{owner_participant_id}",
+            headers=auth_headers,
+        )
+
+        assert resp.status_code == 403
+        body = resp.json()
+        assert body["error"] == "last_participant_cannot_leave"
+        assert body["status_code"] == 403

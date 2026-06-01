@@ -41,6 +41,7 @@ class CreateGroupUseCase:
         all_participants = [participant] + alias_participants
 
         group_data = GroupData(
+            owner_id=participant.id,  # owner_id is participant.id, NOT user_id
             name=name,
             currency=currency,
             participants=[

@@ -90,3 +90,24 @@ class TestCreateGroupUseCase:
         created_arg: Group = groups_repository.create.call_args[0][0]
         groups_repository.get_by_id.assert_awaited_once_with(Id.create(created_arg.id))
         assert result is group
+
+    async def test_created_group_has_owner_id_equal_to_creator_participant_id(
+        self,
+        groups_repository: AsyncMock,
+        users_repository: AsyncMock,
+        creator,
+        group: Group,
+    ):
+        users_repository.get_by_id.return_value = creator
+        groups_repository.get_by_id.return_value = group
+
+        use_case = CreateGroupUseCase(groups_repository, users_repository)
+        await use_case(name="Friends", creator_id=CREATOR_ID)
+
+        created_arg: Group = groups_repository.create.call_args[0][0]
+        # owner_id must be the participant's id, NOT the user_id
+        creator_participant = next(
+            p for p in created_arg.participants if p.user_id == CREATOR_ID
+        )
+        assert created_arg.owner_id == creator_participant.id
+        assert created_arg.owner_id != CREATOR_ID

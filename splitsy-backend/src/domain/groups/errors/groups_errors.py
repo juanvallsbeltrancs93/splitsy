@@ -27,3 +27,11 @@ class ParticipantAlreadyClaimedError(Exception):
 
 class ParticipantNameAlreadyInGroupError(Exception):
     """Raised when a participant with the same display name already exists in the group."""
+
+
+class NotGroupOwnerError(Exception):
+    """Raised when a user attempts an owner-only operation without being the group owner."""
+
+
+class LastParticipantCannotLeaveError(Exception):
+    """Raised when the last active participant tries to leave the group."""

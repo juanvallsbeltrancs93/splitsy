@@ -62,9 +62,12 @@ class TestCreateSettlement:
     async def test_returns_201_with_settlement_data(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
     ):
-        group, second, first_participant_id, second_participant_id = (
-            await _create_group_with_two_users(client, auth_headers, registered_user)
-        )
+        (
+            group,
+            second,
+            first_participant_id,
+            second_participant_id,
+        ) = await _create_group_with_two_users(client, auth_headers, registered_user)
 
         resp = await client.post(
             f"{PREFIX}/settlements/group/{group['id']}",
@@ -87,9 +90,12 @@ class TestCreateSettlement:
     async def test_returns_201_with_optional_note(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
     ):
-        group, second, first_participant_id, second_participant_id = (
-            await _create_group_with_two_users(client, auth_headers, registered_user)
-        )
+        (
+            group,
+            second,
+            first_participant_id,
+            second_participant_id,
+        ) = await _create_group_with_two_users(client, auth_headers, registered_user)
 
         resp = await client.post(
             f"{PREFIX}/settlements/group/{group['id']}",
@@ -109,9 +115,12 @@ class TestCreateSettlement:
     async def test_returns_401_without_token(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
     ):
-        group, second, first_participant_id, second_participant_id = (
-            await _create_group_with_two_users(client, auth_headers, registered_user)
-        )
+        (
+            group,
+            second,
+            first_participant_id,
+            second_participant_id,
+        ) = await _create_group_with_two_users(client, auth_headers, registered_user)
 
         resp = await client.post(
             f"{PREFIX}/settlements/group/{group['id']}",
@@ -128,9 +137,12 @@ class TestCreateSettlement:
     async def test_returns_422_when_amount_is_zero(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
     ):
-        group, second, first_participant_id, second_participant_id = (
-            await _create_group_with_two_users(client, auth_headers, registered_user)
-        )
+        (
+            group,
+            second,
+            first_participant_id,
+            second_participant_id,
+        ) = await _create_group_with_two_users(client, auth_headers, registered_user)
 
         resp = await client.post(
             f"{PREFIX}/settlements/group/{group['id']}",
@@ -150,14 +162,25 @@ class TestListGroupSettlements:
     async def test_returns_200_with_settlements_list(
         self, client: AsyncClient, auth_headers: dict, registered_user: dict
     ):
-        group, second, first_participant_id, second_participant_id = (
-            await _create_group_with_two_users(client, auth_headers, registered_user)
+        (
+            group,
+            second,
+            first_participant_id,
+            second_participant_id,
+        ) = await _create_group_with_two_users(client, auth_headers, registered_user)
+        await _create_settlement(
+            client,
+            auth_headers,
+            group["id"],
+            first_participant_id,
+            second_participant_id,
         )
         await _create_settlement(
-            client, auth_headers, group["id"], first_participant_id, second_participant_id
-        )
-        await _create_settlement(
-            client, auth_headers, group["id"], first_participant_id, second_participant_id
+            client,
+            auth_headers,
+            group["id"],
+            first_participant_id,
+            second_participant_id,
         )
 
         resp = await client.get(

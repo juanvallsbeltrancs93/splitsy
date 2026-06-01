@@ -13,12 +13,14 @@ class GroupMapper(Mapper[Group, GroupORM]):
                 id=orm_model.id,
                 name=orm_model.name,
                 currency=orm_model.currency,
+                owner_id=orm_model.owner_id,
                 participants=[
                     ParticipantData(
                         id=p.id,
                         display_name=p.display_name,
                         type=p.type,
                         user_id=p.user_id,
+                        is_active=p.is_active,
                     )
                     for p in orm_model.participants
                 ],
@@ -30,6 +32,7 @@ class GroupMapper(Mapper[Group, GroupORM]):
             id=entity.id,
             name=entity.name,
             currency=entity.currency,
+            owner_id=entity.owner_id,
             participants=self.to_participants(entity),
         )
 
@@ -41,6 +44,7 @@ class GroupMapper(Mapper[Group, GroupORM]):
                 display_name=p.display_name,
                 type=p.type.value,
                 user_id=p.user_id,
+                is_active=p.is_active,
             )
             for p in entity.participants
         ]
