@@ -1,0 +1,13 @@
+:root {
+  --splitsy-font-family:      'Inter', 'Helvetica', 'Arial', sans-serif;
+  --splitsy-font-xs:          0.75rem;
+  --splitsy-font-sm:          0.8rem;
+  --splitsy-font-base:        0.875rem;
+  --splitsy-font-md:          1rem;
+  --splitsy-font-lg:          1.25rem;
+  --splitsy-font-xl:          1.5rem;
+  --splitsy-font-2xl:         2rem;
+  --splitsy-font-weight-normal:  400;
+  --splitsy-font-weight-semi:    600;
+  --splitsy-font-weight-bold:    700;
+}

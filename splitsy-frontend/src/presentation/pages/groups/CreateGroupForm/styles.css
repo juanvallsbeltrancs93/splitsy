@@ -1,0 +1,90 @@
+.create-group-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-5);
+}
+
+.create-group-form__alias-row {
+  display: flex;
+  gap: var(--splitsy-space-2);
+  align-items: flex-start;
+}
+
+.create-group-form__alias-input {
+  flex: 1;
+}
+
+.create-group-form__aliases {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-2);
+  margin-top: var(--splitsy-space-1);
+}
+
+.create-group-form__alias-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--splitsy-bg-surface);
+  border: 1px solid var(--splitsy-border);
+  border-radius: var(--splitsy-radius-md);
+  padding: var(--splitsy-space-2) var(--splitsy-space-3);
+}
+
+.create-group-form__alias-name {
+  font-size: var(--splitsy-font-base);
+  color: var(--splitsy-text);
+}
+
+.create-group-form__alias-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--splitsy-text-muted);
+  font-size: var(--splitsy-font-md);
+  padding: 0;
+  line-height: 1;
+}
+
+.create-group-form__alias-remove:hover {
+  color: var(--splitsy-text);
+}
+
+.create-group-form__back {
+  display: flex;
+  align-items: center;
+  gap: var(--splitsy-space-1);
+  margin-bottom: var(--splitsy-space-4);
+  color: var(--splitsy-text-muted);
+  font-size: var(--splitsy-font-base);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+.create-group-form__back:hover {
+  color: var(--splitsy-text);
+}
+
+.create-group-form__alias-item--self {
+  border-color: var(--splitsy-primary);
+  opacity: 0.85;
+}
+
+.create-group-form__add-btn {
+  color: var(--splitsy-primary) !important;
+  border-color: var(--splitsy-primary) !important;
+  min-width: auto !important;
+}
+
+.create-group-form__alias-badge {
+  font-size: var(--splitsy-font-xs);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-primary);
+  background: none;
+  border: 1px solid var(--splitsy-primary);
+  border-radius: var(--splitsy-radius-sm);
+  padding: 2px 6px;
+  line-height: 1.4;
+}

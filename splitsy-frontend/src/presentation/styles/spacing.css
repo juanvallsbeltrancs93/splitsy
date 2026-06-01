@@ -1,0 +1,16 @@
+:root {
+  --splitsy-space-1:   4px;
+  --splitsy-space-2:   8px;
+  --splitsy-space-3:   12px;
+  --splitsy-space-4:   16px;
+  --splitsy-space-5:   20px;
+  --splitsy-space-6:   24px;
+  --splitsy-space-7:   28px;
+  --splitsy-space-8:   32px;
+  --splitsy-space-10:  40px;
+  --splitsy-space-12:  48px;
+
+  --splitsy-list-item-padding-y: var(--splitsy-space-3);   /* 12px vertical */
+  --splitsy-list-item-padding-x: var(--splitsy-space-4);   /* 16px horizontal */
+  --splitsy-list-item-gap:       var(--splitsy-space-2);   /* 8px between items */
+}

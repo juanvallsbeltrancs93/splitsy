@@ -1,0 +1,5 @@
+.register-form__password-hint {
+  font-size: var(--splitsy-font-xs);
+  color: var(--splitsy-text-muted);
+  margin-top: calc(-1 * var(--splitsy-space-3));
+}

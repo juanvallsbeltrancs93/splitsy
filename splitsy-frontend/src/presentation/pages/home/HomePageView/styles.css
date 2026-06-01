@@ -1,0 +1,16 @@
+.home-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--splitsy-space-5);
+}
+
+.home-page__title {
+  font-size: var(--splitsy-font-lg);
+  font-weight: var(--splitsy-font-weight-bold);
+  color: var(--splitsy-text);
+}
+
+.home-page__new-group-btn {
+  /* MUI Button styled via theme */
+}

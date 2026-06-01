@@ -1,0 +1,25 @@
+:root {
+  /* Backgrounds */
+  --splitsy-bg:              #111110;
+  --splitsy-bg-surface:      #1c1b1a;
+  --splitsy-bg-hover:        #252422;
+  --splitsy-bg-active:       #1a1917;
+  --splitsy-bg-input:        #161614;
+  --splitsy-bg-dialog:       #26241f;
+
+  /* Borders */
+  --splitsy-border:          #2e2c29;
+
+  /* Accent */
+  --splitsy-primary:         #e8a045;
+  --splitsy-primary-dark:    #d08a2e;
+
+  /* Text */
+  --splitsy-text:            #f5f3ef;
+  --splitsy-text-muted:      #9d9a94;
+  --splitsy-text-disabled:   #5a5650;
+
+  /* Semantic */
+  --splitsy-error:           #e06b6b;
+  --splitsy-success:         #4caf50;
+}

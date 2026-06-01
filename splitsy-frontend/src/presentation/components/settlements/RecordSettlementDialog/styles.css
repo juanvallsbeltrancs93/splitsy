@@ -1,0 +1,35 @@
+.record-settlement-dialog__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.record-settlement-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-4);
+  padding-top: var(--splitsy-space-2);
+}
+
+.record-settlement-dialog__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--splitsy-space-4);
+  background-color: var(--splitsy-bg-surface);
+  border: 1px solid var(--splitsy-border);
+  border-radius: var(--splitsy-radius-lg);
+}
+
+.record-settlement-dialog__names {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text);
+}
+
+.record-settlement-dialog__amount {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-bold);
+  color: var(--splitsy-primary);
+  white-space: nowrap;
+}

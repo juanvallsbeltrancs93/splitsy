@@ -1,0 +1,94 @@
+.expense-detail__header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.expense-detail__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--splitsy-space-2) var(--splitsy-space-2) 0;
+}
+
+.expense-detail__topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--splitsy-space-1);
+}
+
+.expense-detail__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--splitsy-space-3) var(--splitsy-space-6) var(--splitsy-space-4);
+}
+
+.expense-detail__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--splitsy-space-2);
+  line-height: 1;
+}
+
+.expense-detail__title {
+  font-size: var(--splitsy-font-lg);
+  font-weight: var(--splitsy-font-weight-bold);
+  color: var(--splitsy-text);
+  margin: 0 0 var(--splitsy-space-1);
+}
+
+.expense-detail__date {
+  font-size: var(--splitsy-font-base);
+  color: var(--splitsy-text-muted);
+  margin: 0;
+}
+
+.expense-detail__section {
+  margin-bottom: var(--splitsy-space-5);
+}
+
+.expense-detail__section-title {
+  display: block;
+  font-size: var(--splitsy-font-xs);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--splitsy-space-2);
+}
+
+.expense-detail__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-list-item-gap);
+}
+
+
+.expense-detail__nav-btn {
+  background: none;
+  border: none;
+  color: var(--splitsy-text-muted);
+  font-size: var(--splitsy-font-lg);
+  font-weight: var(--splitsy-font-weight-bold);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  font-family: inherit;
+  line-height: 1;
+  border-radius: var(--splitsy-radius-md);
+  padding: 0;
+}
+
+.expense-detail__nav-btn:hover:not(:disabled) {
+  color: var(--splitsy-text);
+}
+
+.expense-detail__nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}

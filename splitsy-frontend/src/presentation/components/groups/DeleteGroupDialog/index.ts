@@ -1,0 +1,1 @@
+export { DeleteGroupDialog } from './DeleteGroupDialog';

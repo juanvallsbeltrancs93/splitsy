@@ -1,0 +1,18 @@
+.expense-actions-menu__trigger {
+  padding: 8px;
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.expense-actions-menu__item {
+  min-height: 48px;
+  padding: 10px 16px;
+}
+
+.expense-actions-menu__item--danger {
+  color: var(--color-error, #d32f2f);
+}
+
+.expense-actions-menu__item--danger .MuiListItemIcon-root {
+  color: var(--color-error, #d32f2f);
+}

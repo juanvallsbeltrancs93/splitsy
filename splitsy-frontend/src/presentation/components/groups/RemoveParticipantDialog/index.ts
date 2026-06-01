@@ -1,0 +1,1 @@
+export { RemoveParticipantDialog } from './RemoveParticipantDialog';

@@ -1,0 +1,1 @@
+export { JoinGroupView } from './JoinGroupView';

@@ -1,0 +1,86 @@
+.settle-up-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-6);
+  padding: var(--splitsy-space-4);
+}
+
+.settle-up-tab__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-3);
+}
+
+.settle-up-tab__section-title {
+  font-size: var(--splitsy-font-lg);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text);
+}
+
+.settle-up-tab__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--splitsy-space-12) var(--splitsy-space-6);
+  gap: var(--splitsy-space-3);
+  text-align: center;
+}
+
+.settle-up-tab__empty-title {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text);
+}
+
+.settle-up-tab__plan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-3);
+}
+
+.settle-up-tab__plan-item {
+  background-color: var(--splitsy-bg-surface);
+  border: 1px solid var(--splitsy-border);
+  border-radius: var(--splitsy-radius-lg);
+  padding: var(--splitsy-space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--splitsy-space-3);
+}
+
+.settle-up-tab__plan-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-1);
+  flex: 1;
+}
+
+.settle-up-tab__plan-names {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text);
+}
+
+.settle-up-tab__plan-amount {
+  font-size: var(--splitsy-font-sm);
+  color: var(--splitsy-primary);
+  font-weight: var(--splitsy-font-weight-bold);
+}
+
+.settle-up-tab__record-btn {
+  padding: var(--splitsy-space-2) var(--splitsy-space-4);
+  background-color: var(--splitsy-primary);
+  color: var(--splitsy-bg);
+  border: none;
+  border-radius: var(--splitsy-radius-md);
+  font-size: var(--splitsy-font-base);
+  font-weight: var(--splitsy-font-weight-semi);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.settle-up-tab__record-btn:hover {
+  background-color: var(--splitsy-primary-hover);
+}

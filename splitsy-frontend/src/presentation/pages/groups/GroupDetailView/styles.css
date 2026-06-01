@@ -1,0 +1,77 @@
+.group-detail__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--splitsy-space-4);
+}
+
+.group-detail__back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--splitsy-text-muted);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--splitsy-space-1);
+  font-family: inherit;
+  font-size: var(--splitsy-font-base);
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.group-detail__back:hover {
+  color: var(--splitsy-text);
+}
+
+.group-detail__title {
+  font-size: var(--splitsy-font-xl);
+  font-weight: var(--splitsy-font-weight-bold);
+  color: var(--splitsy-text);
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.group-detail__tabs {
+  margin-bottom: var(--splitsy-space-5);
+}
+
+.group-detail__tabs .MuiTabs-indicator {
+  background-color: var(--splitsy-primary);
+}
+.group-detail__tabs .MuiTab-root {
+  color: var(--splitsy-text-muted);
+  text-transform: none;
+}
+.group-detail__tabs .MuiTab-root.Mui-selected {
+  color: var(--splitsy-primary);
+}
+
+.group-detail__add-btn {
+  position: fixed;
+  bottom: var(--splitsy-space-6);
+  right: var(--splitsy-space-6);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--splitsy-primary);
+  color: var(--splitsy-bg);
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.group-detail__add-btn:hover {
+  background-color: var(--splitsy-primary-dark);
+  transform: scale(1.05);
+}
+.group-detail__add-btn:active {
+  transform: scale(0.97);
+}

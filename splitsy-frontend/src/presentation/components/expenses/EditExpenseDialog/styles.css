@@ -1,0 +1,101 @@
+.edit-expense-dialog__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-expense-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-5);
+  padding-top: var(--splitsy-space-2);
+}
+
+.edit-expense-dialog__section-label {
+  font-size: var(--splitsy-font-base);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text-muted);
+  margin-bottom: var(--splitsy-space-2);
+}
+
+.edit-expense-dialog__splits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-2);
+}
+
+.edit-expense-dialog__split-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--splitsy-space-2);
+}
+
+.edit-expense-dialog__split-name {
+  flex: 1;
+  font-size: var(--splitsy-font-md);
+  color: var(--splitsy-text);
+}
+
+.edit-expense-dialog__split-amount {
+  width: 90px;
+}
+
+/* Hide number input spinners */
+.edit-expense-dialog__form input[type='number']::-webkit-outer-spin-button,
+.edit-expense-dialog__form input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Split mode toggle */
+.edit-expense-dialog__mode-toggle {
+  display: flex;
+  border: 1px solid var(--splitsy-border);
+  border-radius: var(--splitsy-radius-md);
+  overflow: hidden;
+}
+
+.edit-expense-dialog__mode-btn {
+  flex: 1;
+  padding: var(--splitsy-space-2) var(--splitsy-space-3);
+  background: none;
+  border: none;
+  color: var(--splitsy-text-muted);
+  font-size: var(--splitsy-font-base);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.edit-expense-dialog__mode-btn:first-child {
+  border-right: 1px solid var(--splitsy-border);
+}
+
+.edit-expense-dialog__mode-btn--active {
+  background-color: var(--splitsy-primary);
+  color: var(--splitsy-bg);
+  font-weight: var(--splitsy-font-weight-semi);
+}
+
+.edit-expense-dialog__mode-btn:not(.edit-expense-dialog__mode-btn--active):hover {
+  background-color: var(--splitsy-bg-hover);
+  color: var(--splitsy-text);
+}
+
+/* Amount + Paid By row */
+.edit-expense-dialog__amount-row {
+  display: flex;
+  gap: var(--splitsy-space-3);
+  align-items: flex-start;
+}
+
+.edit-expense-dialog__amount-row > * {
+  flex: 1;
+}
+
+/* Currency symbol */
+.edit-expense-dialog__currency-symbol {
+  margin-right: var(--splitsy-space-1);
+  color: var(--splitsy-text-muted);
+}

@@ -1,0 +1,25 @@
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-3);
+}
+
+.expense-list__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--splitsy-space-12) var(--splitsy-space-6);
+  gap: var(--splitsy-space-3);
+  text-align: center;
+}
+
+.expense-list__empty-title {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text);
+}
+
+.expense-list__empty-subtitle {
+  font-size: var(--splitsy-font-base);
+  color: var(--splitsy-text-muted);
+}

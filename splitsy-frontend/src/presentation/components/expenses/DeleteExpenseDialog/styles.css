@@ -1,0 +1,21 @@
+.delete-expense-dialog__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px 16px;
+}
+
+.delete-expense-dialog__btn {
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .delete-expense-dialog__actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .delete-expense-dialog__btn {
+    width: auto;
+  }
+}

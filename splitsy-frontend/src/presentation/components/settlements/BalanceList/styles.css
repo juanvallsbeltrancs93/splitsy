@@ -1,0 +1,12 @@
+.balance-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-list-item-gap);
+}
+
+.balance-list__empty {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--text-secondary, #757575);
+  font-size: 16px;
+}

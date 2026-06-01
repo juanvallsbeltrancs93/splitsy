@@ -1,0 +1,35 @@
+.settlement-card {
+  background-color: var(--splitsy-bg-surface);
+  border: 1px solid var(--splitsy-border);
+  border-radius: var(--splitsy-radius-lg);
+  padding: var(--splitsy-space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+}
+
+.settlement-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--splitsy-space-1);
+}
+
+.settlement-card__names {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-semi);
+  color: var(--splitsy-text);
+}
+
+.settlement-card__date {
+  font-size: var(--splitsy-font-sm);
+  color: var(--splitsy-text-muted);
+}
+
+.settlement-card__amount {
+  font-size: var(--splitsy-font-md);
+  font-weight: var(--splitsy-font-weight-bold);
+  color: var(--splitsy-primary);
+  white-space: nowrap;
+}

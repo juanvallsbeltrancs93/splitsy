@@ -1,0 +1,800 @@
+{
+  "yaakVersion": "2026.3.1",
+  "yaakSchema": 4,
+  "timestamp": "2026-05-02T20:05:53.805678",
+  "resources": {
+    "workspaces": [
+      {
+        "model": "workspace",
+        "id": "wk_Q3WMtMQsZi",
+        "createdAt": "2026-04-15T15:33:54.313619",
+        "updatedAt": "2026-04-15T15:58:52.277405",
+        "authentication": {
+          "token": "${[ response.body.path(request='rq_Zyz8AEzxkJ', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5hY2Nlc3NfdG9rZW4') ]}"
+        },
+        "authenticationType": "bearer",
+        "description": "",
+        "headers": [],
+        "name": "Splitsy",
+        "encryptionKeyChallenge": null,
+        "settingValidateCertificates": true,
+        "settingFollowRedirects": true,
+        "settingRequestTimeout": 0,
+        "settingDnsOverrides": []
+      }
+    ],
+    "environments": [
+      {
+        "model": "environment",
+        "id": "ev_dJ7fLcRjEZ",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "createdAt": "2026-04-15T15:34:06.405812",
+        "updatedAt": "2026-04-15T19:03:38.111738",
+        "name": "Local",
+        "public": true,
+        "base": false,
+        "parentModel": "environment",
+        "parentId": null,
+        "variables": [
+          {
+            "enabled": true,
+            "name": "base_url",
+            "value": "http://0.0.0.0:8000/api/splitsy/v0",
+            "id": "8aZsareT5v"
+          }
+        ],
+        "color": null,
+        "sortPriority": 0.0
+      }
+    ],
+    "folders": [
+      {
+        "model": "folder",
+        "id": "fl_B29kwDCgf6",
+        "createdAt": "2026-04-15T15:34:43.170229",
+        "updatedAt": "2026-04-15T15:34:43.170231",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Settlements",
+        "sortPriority": 5.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_hGTSKC7wxt",
+        "createdAt": "2026-04-15T15:34:43.158296",
+        "updatedAt": "2026-04-15T15:34:43.158298",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Expenses",
+        "sortPriority": 4.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_a5q6NpF3Cd",
+        "createdAt": "2026-04-15T15:34:43.146341",
+        "updatedAt": "2026-04-15T15:34:43.146343",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Groups",
+        "sortPriority": 3.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_Qwq6ZG26ba",
+        "createdAt": "2026-04-15T15:34:43.133084",
+        "updatedAt": "2026-04-15T15:34:43.133087",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Users",
+        "sortPriority": 2.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_FLEamdcLAv",
+        "createdAt": "2026-04-15T15:34:43.115020",
+        "updatedAt": "2026-04-15T15:34:43.115045",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Auth",
+        "sortPriority": 1.0
+      }
+    ],
+    "httpRequests": [
+      {
+        "model": "http_request",
+        "id": "rq_5YvJjZnKXN",
+        "createdAt": "2026-05-02T15:33:07.606600",
+        "updatedAt": "2026-05-02T15:36:52.074772",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {
+          "token": "${[ response.body.path(request='rq_PqCH6eqoDw', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5hY2Nlc3NfdG9rZW4') ]}"
+        },
+        "authenticationType": "bearer",
+        "body": {
+          "text": "{\n  \"type\": \"non-registered\",\n  \"display_name\": \"pepito\"\n}"
+        },
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "POST",
+        "name": "Claim participant",
+        "sortPriority": 3.002,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}/claim/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMV0uaWQ') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_nvp5mGSPBj",
+        "createdAt": "2026-04-29T17:56:25.682261",
+        "updatedAt": "2026-04-29T18:19:03.689753",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_hGTSKC7wxt",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"Dinner\",\n  \"amount\": \"100.00\",\n  \"date\": \"2026-01-15T20:00:00Z\",\n  \"paid_by\": \"${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMF0uaWQ') ]}\",\n  \"splits\": [\n    { \"participant_id\": \"${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMF0uaWQ') ]}\", \"amount\": \"75.00\" },\n    { \"participant_id\": \"${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMV0uaWQ') ]}\", \"amount\": 25 },\n  ],\n  \"description\": \"A small dinner.\"\n}\n"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "TXtUCErwiR"
+          }
+        ],
+        "method": "POST",
+        "name": "Create Expense (participants)",
+        "sortPriority": 1.001,
+        "url": "${[ base_url ]}/expenses/group/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_HDuSnBzKZu",
+        "createdAt": "2026-04-29T16:19:48.704980",
+        "updatedAt": "2026-04-29T16:25:27.115228",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "DELETE",
+        "name": "Remove Participant (non-registered)",
+        "sortPriority": 4.001,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}/participants/${[ response.body.path(request='rq_vdUUh6bzn5', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbM10uaWQ') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "user_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_vdUUh6bzn5",
+        "createdAt": "2026-04-29T16:16:32.304485",
+        "updatedAt": "2026-04-29T16:17:52.470690",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"type\": \"non-registered\",\n  \"display_name\": \"pepito\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "VSb0JW2Kfc"
+          }
+        ],
+        "method": "POST",
+        "name": "Add Participant (non-registered)",
+        "sortPriority": 3.001,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}/participants",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_PqCH6eqoDw",
+        "createdAt": "2026-04-15T18:55:42.551763",
+        "updatedAt": "2026-04-15T18:56:21.399214",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_FLEamdcLAv",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "form": [
+            {
+              "enabled": true,
+              "id": "v8QXVck69N",
+              "name": "username",
+              "value": "${[ request.body.path(requestId='rq_mvJRJwZNyT', result='first', join=b64'LCA', path=b64'JC5lbWFpbA') ]}"
+            },
+            {
+              "enabled": true,
+              "id": "GVD2WGN2zD",
+              "name": "password",
+              "value": "${[ request.body.path(requestId='rq_mvJRJwZNyT', result='first', join=b64'LCA', path=b64'JC5wYXNzd29yZA') ]}"
+            },
+            {
+              "enabled": true,
+              "id": "TU3bcH4mps",
+              "name": "",
+              "value": ""
+            }
+          ]
+        },
+        "bodyType": "multipart/form-data",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "multipart/form-data",
+            "id": "cPEmVJgIIm"
+          }
+        ],
+        "method": "POST",
+        "name": "Login user 2",
+        "sortPriority": 2.001,
+        "url": "${[ base_url ]}/auth/token",
+        "urlParameters": [
+          {
+            "enabled": false,
+            "name": "username",
+            "value": "nicolas@example.com",
+            "id": "8Z8VMm9sN5"
+          },
+          {
+            "enabled": false,
+            "name": "password",
+            "value": "Password123!",
+            "id": "iKsr8f43PZ"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": "",
+            "id": "Zvf4HgTRrQ"
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_mvJRJwZNyT",
+        "createdAt": "2026-04-15T16:06:45.534089",
+        "updatedAt": "2026-04-15T18:54:12.398312",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_FLEamdcLAv",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"Juan\",\n  \"email\": \"juan@example.com\",\n  \"password\": \"Password123!\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "0haTdh7R2Y"
+          }
+        ],
+        "method": "POST",
+        "name": "Register user 2",
+        "sortPriority": 1.001,
+        "url": "${[ base_url ]}/auth/register",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_sVBa3uPRHT",
+        "createdAt": "2026-04-15T15:35:56.572478",
+        "updatedAt": "2026-04-15T16:22:54.393375",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_B29kwDCgf6",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "List Group Settlements",
+        "sortPriority": 2.0,
+        "url": "${[ base_url ]}/settlements/group/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_4w7MRdMH3B",
+        "createdAt": "2026-04-15T15:35:56.551891",
+        "updatedAt": "2026-05-02T15:32:18.036754",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_B29kwDCgf6",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"from_participant_id\": \"${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMV0uaWQ') ]}\",\n  \"to_participant_id\": \"${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMF0uaWQ') ]}\",\n  \"amount\": \"20.00\",\n  \"date\": \"2026-01-15T20:00:00Z\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "NaXVtSSRYv"
+          }
+        ],
+        "method": "POST",
+        "name": "Create Settlement",
+        "sortPriority": 1.0,
+        "url": "${[ base_url ]}/settlements/group/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_ZeHCUMRHbu",
+        "createdAt": "2026-04-15T15:35:48.742164",
+        "updatedAt": "2026-04-15T18:57:40.055582",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_hGTSKC7wxt",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "DELETE",
+        "name": "Delete Expense",
+        "sortPriority": 5.0,
+        "url": "${[ base_url ]}/expenses/${[ response.body.path(request='rq_X3bwsJYJwF', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "expense_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_6G29fvsBhi",
+        "createdAt": "2026-04-15T15:35:48.729306",
+        "updatedAt": "2026-04-29T18:27:36.531535",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_hGTSKC7wxt",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"Lunch\",\n  \"splits\": [\n    {\n      \"participant_id\": \"${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMF0uaWQ') ]}\",\n      \"amount\": \"100.00\"\n    }\n  ],\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "KmwY6ZwgRN"
+          }
+        ],
+        "method": "PUT",
+        "name": "Update Expense",
+        "sortPriority": 4.0,
+        "url": "${[ base_url ]}/expenses/${[ response.body.path(request='rq_nvp5mGSPBj', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "expense_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_SDGQ3hTmRG",
+        "createdAt": "2026-04-15T15:35:48.716377",
+        "updatedAt": "2026-04-29T18:25:39.092515",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_hGTSKC7wxt",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "Get Expense",
+        "sortPriority": 3.0,
+        "url": "${[ base_url ]}/expenses/${[ response.body.path(request='rq_nvp5mGSPBj', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "expense_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_NAscZwDTp8",
+        "createdAt": "2026-04-15T15:35:48.701855",
+        "updatedAt": "2026-04-15T16:16:01.061809",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_hGTSKC7wxt",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "List Group Expenses",
+        "sortPriority": 2.0,
+        "url": "${[ base_url ]}/expenses/group/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_tiSXYrwUQr",
+        "createdAt": "2026-04-15T15:35:08.070445",
+        "updatedAt": "2026-04-15T16:34:42.714563",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "Get Balances",
+        "sortPriority": 5.0,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}/balances",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_RuBisAxtwC",
+        "createdAt": "2026-04-15T15:35:08.056906",
+        "updatedAt": "2026-04-15T18:50:18.513098",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "DELETE",
+        "name": "Remove Participant",
+        "sortPriority": 4.0,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}/participants/${[ response.body.path(request='rq_52dPQLjJtH', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5wYXJ0aWNpcGFudHNbMV0') ]}",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "user_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_52dPQLjJtH",
+        "createdAt": "2026-04-15T15:35:08.042668",
+        "updatedAt": "2026-05-02T15:29:04.197613",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"user_id\": \"${[ response.body.path(request='rq_mvJRJwZNyT', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}\", \"type\": \"REGISTERED\", \"display_name\": \"juancito\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "VSb0JW2Kfc"
+          }
+        ],
+        "method": "POST",
+        "name": "Add Participant",
+        "sortPriority": 3.0,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}/participants",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "group_id",
+            "value": "",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_Ft56dnPUWT",
+        "createdAt": "2026-04-15T15:35:08.029294",
+        "updatedAt": "2026-04-15T16:05:15.823119",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "yeYZuE6Heh"
+          }
+        ],
+        "method": "GET",
+        "name": "Get Group",
+        "sortPriority": 2.0,
+        "url": "${[ base_url ]}/groups/${[ response.body.path(request='rq_kztEHcpuZi', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JC5pZA') ]}",
+        "urlParameters": [
+          {
+            "enabled": false,
+            "name": "group_id",
+            "value": "",
+            "id": "NJSxxRu3yt"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": "",
+            "id": "v0gj2hGV5e"
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_kztEHcpuZi",
+        "createdAt": "2026-04-15T15:35:08.008264",
+        "updatedAt": "2026-05-02T20:04:59.958876",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_a5q6NpF3Cd",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"Weekend Trip\",\n  \"aliases\": [\"Juan\", \"JL\"],\n  \"currency\": \"EUR\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "5neGMfH9nv"
+          }
+        ],
+        "method": "POST",
+        "name": "Create Group",
+        "sortPriority": 1.0,
+        "url": "${[ base_url ]}/groups",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_CUZGwXSRGF",
+        "createdAt": "2026-04-15T15:34:57.777693",
+        "updatedAt": "2026-04-15T15:55:53.124419",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_Qwq6ZG26ba",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "Get Me",
+        "sortPriority": 1.0,
+        "url": "${[ base_url ]}/users/me",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_Zyz8AEzxkJ",
+        "createdAt": "2026-04-15T15:34:52.695547",
+        "updatedAt": "2026-04-16T17:07:04.273053",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_FLEamdcLAv",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "form": [
+            {
+              "enabled": true,
+              "id": "v8QXVck69N",
+              "name": "username",
+              "value": "${[ request.body.path(result='first', join=b64'LCA', requestId='rq_cimPUJbjze', path=b64'JC5lbWFpbA') ]}"
+            },
+            {
+              "enabled": true,
+              "id": "GVD2WGN2zD",
+              "name": "password",
+              "value": "${[ request.body.path(requestId='rq_cimPUJbjze', result='first', join=b64'LCA', path=b64'JC5wYXNzd29yZA') ]}"
+            },
+            {
+              "enabled": true,
+              "id": "wTzG8iqETC",
+              "name": "",
+              "value": ""
+            }
+          ]
+        },
+        "bodyType": "multipart/form-data",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "multipart/form-data",
+            "id": "cPEmVJgIIm"
+          }
+        ],
+        "method": "POST",
+        "name": "Login user 1",
+        "sortPriority": 2.0,
+        "url": "${[ base_url ]}/auth/token",
+        "urlParameters": [
+          {
+            "enabled": false,
+            "name": "username",
+            "value": "nicolas@example.com",
+            "id": "8Z8VMm9sN5"
+          },
+          {
+            "enabled": false,
+            "name": "password",
+            "value": "Password123!",
+            "id": "iKsr8f43PZ"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": "",
+            "id": "Zvf4HgTRrQ"
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_cimPUJbjze",
+        "createdAt": "2026-04-15T15:34:52.676506",
+        "updatedAt": "2026-04-15T18:54:06.229907",
+        "workspaceId": "wk_Q3WMtMQsZi",
+        "folderId": "fl_FLEamdcLAv",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"Nicolas\",\n  \"email\": \"nicolas@example.com\",\n  \"password\": \"Password123!\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "0haTdh7R2Y"
+          }
+        ],
+        "method": "POST",
+        "name": "Register user 1",
+        "sortPriority": 1.0,
+        "url": "${[ base_url ]}/auth/register",
+        "urlParameters": []
+      }
+    ],
+    "grpcRequests": [],
+    "websocketRequests": []
+  }
+}

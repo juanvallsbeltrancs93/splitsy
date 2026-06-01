@@ -1,0 +1,16 @@
+.group-actions-menu__trigger {
+  padding: 8px;
+}
+
+.group-actions-menu__item {
+  min-height: 48px;
+  padding: 10px 16px;
+}
+
+.group-actions-menu__item--danger {
+  color: var(--color-error, #d32f2f);
+}
+
+.group-actions-menu__item--danger .MuiListItemIcon-root {
+  color: var(--color-error, #d32f2f);
+}
